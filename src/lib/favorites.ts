@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from "react";
 import type { CardMatch } from "./types";
 
-const STORAGE_KEY = "maidaan:my-list:v1";
+const STORAGE_KEY = "maidaan:my-list:v2";
 
 function isNullableString(value: unknown): value is string | null {
   return typeof value === "string" || value === null;

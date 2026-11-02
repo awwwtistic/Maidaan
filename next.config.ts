@@ -7,8 +7,13 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "streamed.pk",
-        pathname: "/api/images/**",
+        hostname: "**.ppvservices.st",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "thumbs.poocloud.in",
+        pathname: "/**",
       },
     ],
   },

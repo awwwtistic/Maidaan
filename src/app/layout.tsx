@@ -61,8 +61,10 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  prefetchDNS("https://streamed.pk");
-  preconnect("https://streamed.pk");
+  prefetchDNS("https://static.ppvservices.st");
+  preconnect("https://static.ppvservices.st");
+  prefetchDNS("https://thumbs.poocloud.in");
+  preconnect("https://thumbs.poocloud.in");
 
   return (
     <html lang="en" className={`${anton.variable} ${manrope.variable}`}>

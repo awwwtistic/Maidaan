@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getActiveCards } from "@/lib/streamed";
+import { getActiveCards } from "@/lib/ppv";
 import { SearchView } from "@/components/discovery/SearchView";
 
 export const revalidate = 30;

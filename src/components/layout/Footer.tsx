@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Logo } from "./Logo";
-import { NAV_LINKS, SITE_NAME, STREAMED_DOCS_URL, STREAMED_URL } from "@/lib/site";
+import { NAV_LINKS, PPV_DOCS_URL, PPV_URL, SITE_NAME } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -42,17 +42,17 @@ export function Footer() {
           <p className="text-sm leading-relaxed text-muted">
             Live data, posters and third-party player embeds are provided by{" "}
             <a
-              href={STREAMED_URL}
+              href={PPV_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 font-medium text-white underline decoration-white/25 underline-offset-4 transition-colors hover:text-brand"
             >
-              Streamed
+              PPV.st
               <ArrowUpRight className="size-3.5" aria-hidden="true" />
             </a>
             . Read the{" "}
             <a
-              href={STREAMED_DOCS_URL}
+              href={PPV_DOCS_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/80 underline decoration-white/20 underline-offset-4 transition-colors hover:text-brand"

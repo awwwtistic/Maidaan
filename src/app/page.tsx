@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, RadioTower, Trophy } from "lucide-react";
 import type { MatchView } from "@/lib/types";
-import { getHomeData } from "@/lib/streamed";
+import { getHomeData } from "@/lib/ppv";
 import { Hero } from "@/components/home/Hero";
 import { QuietNow } from "@/components/home/QuietNow";
 import { Rail } from "@/components/home/Rail";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE, STREAMED_URL } from "@/lib/site";
+import { PPV_URL, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib/site";
 
 export const revalidate = 30;
 
@@ -58,12 +58,12 @@ export default async function HomePage() {
           </Link>
           {failed ? (
             <a
-              href={STREAMED_URL}
+              href={PPV_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-11 items-center gap-1.5 rounded-full px-4 text-sm font-semibold text-muted transition-colors hover:text-white"
             >
-              Check Streamed
+              Check PPV.st
               <ArrowUpRight className="size-4" aria-hidden="true" />
             </a>
           ) : null}

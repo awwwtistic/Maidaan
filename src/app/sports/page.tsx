@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CalendarDays, Search, Trophy } from "lucide-react";
-import { getSportsOverview } from "@/lib/streamed";
+import { getSportsOverview } from "@/lib/ppv";
 import { SportTiles } from "@/components/browse/SportTiles";
 import { DataNotice } from "@/components/common/DataNotice";
 

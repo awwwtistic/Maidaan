@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getCatalog } from "@/lib/streamed";
+import { getCatalog } from "@/lib/ppv";
 import { MyListView } from "@/components/discovery/MyListView";
 
 export const revalidate = 30;

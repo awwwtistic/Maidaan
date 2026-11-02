@@ -3,7 +3,7 @@
 **Every Game. One Maidaan**
 
 A cinematic, mobile-first sports streaming front-end powered by the public
-[Streamed API](https://streamed.pk/docs). Near-black surfaces, poster-first cards, bold
+[PPV.st API](https://ppv.st/api). Near-black surfaces, poster-first cards, bold
 condensed headlines and a crimson live pulse — built to feel fast like a streaming app,
 not like a sports data site.
 
@@ -15,8 +15,8 @@ not like a sports data site.
   handling.
 - **Sport pages** — instant client filters (All / Live / Upcoming / 24/7), staggered grid
   and load-more.
-- **Match details** — atmosphere, teams, kickoff/countdown, stream availability, share,
-  My List and related matches.
+- **Match details** — atmosphere, kickoff/countdown, stream availability, share, My List
+  and related matches.
 - **Watch player** — validated third-party embeds, source tabs, language/HD/viewer stream
   picker, reload and open-in-new-tab fallbacks.
 - **Instant search** — all matches indexed on the server, instant client-side scoring,
@@ -37,7 +37,7 @@ browser: filters, search, favorites, time-zone formatting and the player control
 | Styling | Tailwind CSS v4, CSS-first theme |
 | Type | Anton (display) + Manrope (UI) via `next/font` |
 | Icons | `lucide-react` |
-| Data | Streamed public API, fetched in React Server Components |
+| Data | PPV.st public API, fetched in React Server Components |
 | Motion | CSS transitions/keyframes only — no animation library |
 | Images | `next/image`, unoptimized (source images are already tiny WebP) |
 
@@ -70,25 +70,29 @@ Both variables are optional.
 
 | Variable | Purpose | Default |
 | --- | --- | --- |
-| `STREAMED_API_BASE` | Alternate Streamed API origin | `https://streamed.pk/api` |
+| `PPV_API_BASE` | Alternate PPV.st API origin | `https://api.ppv.st/api` |
 | `NEXT_PUBLIC_SITE_URL` | Canonical origin for metadata/Open Graph | `http://localhost:3000` |
 
 Copy `.env.example` to `.env.local` if you need to override them. No API keys are required.
 
 ## Data and caching
 
-- All upstream calls live in [`src/lib/streamed.ts`](src/lib/streamed.ts) and run on the
-  server only. The browser never calls the Streamed API for catalog pages.
-- Catalog routes revalidate every 30 seconds (`export const revalidate = 30`); stream
-  lookups revalidate every 15 seconds. Requests time out after 8 seconds.
-- The data layer is defensive: malformed entries are dropped, dead sources return empty
-  stream groups, and failures return typed empty snapshots. `next build` succeeds even when
-  the API is unreachable; runtime ISR repairs pages as soon as the feed returns.
+- All upstream calls live in [`src/lib/ppv.ts`](src/lib/ppv.ts) and run on the server
+  only. The browser never calls the PPV.st API for catalog pages.
+- A single `GET /api/streams` call supplies categories, fixtures, posters, viewer counts
+  and every feed URL. Catalog routes and the data layer both revalidate every 30 seconds;
+  requests time out after 8 seconds and retry once on a 502/503/504.
+- The data layer is defensive: malformed entries are dropped, feeds without a valid
+  allowlisted embed are omitted, and failures return typed empty snapshots. `next build`
+  succeeds even when the API is unreachable; runtime ISR repairs pages as soon as the feed
+  returns.
 - Match IDs are looked up from the catalog. Unknown IDs render the styled 404; a request-time
-  API outage renders the retry boundary. A stream source that returns no streams is shown as
-  unavailable rather than as a missing page.
-- `date <= 0` marks an always-on 24/7 channel. Live status prefers `/matches/live` and falls
-  back to a four-hour kickoff window if that endpoint fails.
+  API outage renders the retry boundary. An event without a playable feed still has a details
+  page and shows “No playable streams” in the player.
+- Events flagged `always_live`, starting at `starts_at <= 0`, or tagged `24/7 channel` are
+  treated as always-on channels. Live status is derived from `starts_at`/`ends_at`, with a
+  four-hour kickoff window when no end time is published. The non-sports `24/7 Streams`
+  entertainment category is excluded.
 
 ## Project layout
 
@@ -106,11 +110,11 @@ src/lib/                  data layer, sports config, favorites, formatting
 
 ## Streams and attribution
 
-Match data, posters and embeds come from [Streamed](https://streamed.pk) and its providers.
+Match data, posters and embeds come from [PPV.st](https://ppv.st) and its providers.
 Maidaan does not host, proxy or control any stream. Availability, quality and advertising
-inside the player are set by each provider. Only `https://embed.st` URLs are persisted from
-the API and every embed is rendered in an iframe without sandboxing (players require scripts
-and popups), with `allowFullScreen` and an explicit title.
+inside the player are set by each provider. Only `https://taifood-blog.asia` embed URLs are
+persisted from the API and every embed is rendered in an iframe without sandboxing (players
+require scripts and popups), with `allowFullScreen` and an explicit title.
 
 ## Deployment
 

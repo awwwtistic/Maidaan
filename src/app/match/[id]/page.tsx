@@ -13,7 +13,7 @@ import {
   Trophy,
   Tv,
 } from "lucide-react";
-import { getMatchPageData } from "@/lib/streamed";
+import { getMatchPageData } from "@/lib/ppv";
 import { getSport } from "@/lib/sports";
 import { formatCountdown } from "@/lib/format";
 import { toCard } from "@/lib/match";

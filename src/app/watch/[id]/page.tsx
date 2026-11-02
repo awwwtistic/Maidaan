@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { preconnect } from "react-dom";
-import { getWatchPageData } from "@/lib/streamed";
+import { getWatchPageData } from "@/lib/ppv";
 import { getSport } from "@/lib/sports";
 import { PlayerView } from "@/components/player/PlayerView";
 
@@ -37,7 +37,7 @@ export default async function WatchPage({
   params: Promise<{ id: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  preconnect("https://embed.st");
+  preconnect("https://taifood-blog.asia");
 
   const [{ id }, query] = await Promise.all([params, searchParams]);
   const result = await getWatchPageData(id);

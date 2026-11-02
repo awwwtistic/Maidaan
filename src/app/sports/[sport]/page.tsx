@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, CalendarDays, RadioTower, Trophy } from "lucide-react";
 import { SPORTS, getSport, isKnownSport } from "@/lib/sports";
-import { getSportPageData } from "@/lib/streamed";
+import { getSportPageData } from "@/lib/ppv";
 import { toCards } from "@/lib/match";
 import { SportBrowser } from "@/components/browse/SportBrowser";
 import { DataNotice } from "@/components/common/DataNotice";
